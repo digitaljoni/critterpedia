@@ -1,3 +1,5 @@
+import 'package:critterpedia/constants/month_names.dart';
+
 class Fish {
   final int id;
   final String name;
@@ -47,9 +49,20 @@ class Fish {
 
   String get getTimeAvailable => (isAllDay) ? 'All day' : timeAvailable;
   String get getMonthAvailableNorth =>
-      (isAllYear) ? 'All year' : monthRangeNorth;
+      (isAllYear) ? 'All year' : monthNumberToName(monthRangeNorth);
   String get getMonthAvailableSouth =>
-      (isAllYear) ? 'All year' : monthRangeSouth;
+      (isAllYear) ? 'All year' : monthNumberToName(monthRangeSouth);
+
+  String monthNumberToName(String monthRange) {
+    final List<String> monthRangeList =
+        monthRange.replaceAll(' ', '').split('&');
+
+    return monthRangeList.map((String months) {
+      return months.split('-').map((String month) {
+        return monthNames[month];
+      }).join('-');
+    }).join(' & ');
+  }
 }
 
 class AllFish {

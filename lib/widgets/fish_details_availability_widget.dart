@@ -44,7 +44,7 @@ class FishDetailsAvailabilityWidget extends StatelessWidget {
                     flex: 1,
                     child: Center(
                       child: Text(
-                        'Months (N)',
+                        'Northern',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
@@ -55,7 +55,7 @@ class FishDetailsAvailabilityWidget extends StatelessWidget {
                     flex: 1,
                     child: Center(
                       child: Text(
-                        'Months (S)',
+                        'Southern',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
@@ -85,19 +85,28 @@ class FishDetailsAvailabilityWidget extends StatelessWidget {
                   Expanded(
                     flex: 1,
                     child: Center(
-                      child: Text('${fish.getMonthAvailableNorth}'),
+                      child: Text(
+                        '${fish.getMonthAvailableNorth}',
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                   Expanded(
                     flex: 1,
                     child: Center(
-                      child: Text('${fish.getMonthAvailableSouth}'),
+                      child: Text(
+                        '${fish.getMonthAvailableSouth}',
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                   Expanded(
                     flex: 1,
                     child: Center(
-                      child: Text('${fish.getTimeAvailable}'),
+                      child: Text(
+                        '${fish.getTimeAvailable}',
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                 ],
