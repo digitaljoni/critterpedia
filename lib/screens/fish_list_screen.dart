@@ -16,6 +16,8 @@ class FishListScreen extends StatefulWidget {
 
 class _FishListScreenState extends State<FishListScreen> {
   AllFish allFish;
+  List<Fish> filteredFish;
+  int monthToday;
 
   Future<void> _fetchAllFish() async {
     final http.Response response = await http.get('http://acnhapi.com/fish/');
@@ -28,7 +30,7 @@ class _FishListScreenState extends State<FishListScreen> {
   }
 
   Widget _fishListViewBuilder(BuildContext context, int index) {
-    Fish fish = allFish.getList[index];
+    Fish fish = filteredFish[index];
 
     return FishRowWidget(fish, widget.hemisphere);
   }
@@ -37,14 +39,21 @@ class _FishListScreenState extends State<FishListScreen> {
   void initState() {
     super.initState();
     _fetchAllFish();
+
+    monthToday = DateTime.now().month;
   }
 
   @override
   Widget build(BuildContext context) {
     if (allFish != null) {
+      filteredFish = allFish.getListForMonth(
+        month: monthToday,
+        hemisphere: widget.hemisphere,
+      );
+
       return ListView.builder(
         itemBuilder: _fishListViewBuilder,
-        itemCount: allFish.getList.length,
+        itemCount: filteredFish.length,
       );
     }
 

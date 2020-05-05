@@ -63,6 +63,50 @@ class Fish {
       }).join('-');
     }).join(' & ');
   }
+
+  bool availableForNorth(int monthNumber) =>
+      checkAvailability(monthNumber: monthNumber, monthRange: monthRangeNorth);
+  bool availableForSouth(int monthNumber) =>
+      checkAvailability(monthNumber: monthNumber, monthRange: monthRangeSouth);
+
+  bool checkAvailability({int monthNumber, String monthRange}) {
+    if (isAllYear) {
+      return true;
+    }
+
+    bool isAvailable = false;
+
+    final List<String> monthRangeList =
+        monthRange.replaceAll(' ', '').split('&');
+
+    for (int i = 0; i < monthRangeList.length; i++) {
+      final List<String> monthFromTo = monthRangeList[i].split('-');
+
+      final int from = int.parse(monthFromTo[0]);
+
+      if (monthFromTo.length == 1) {
+        if (monthNumber == from) {
+          isAvailable = true;
+        }
+      } else {
+        final int to = int.parse(monthFromTo[1]);
+
+        if (to > from) {
+          if (monthNumber <= to && monthNumber >= from) {
+            isAvailable = true;
+          }
+        } else {
+          // if from > to
+
+          if (!(monthNumber < from && monthNumber > to)) {
+            isAvailable = true;
+          }
+        }
+      }
+    }
+
+    return isAvailable;
+  }
 }
 
 class AllFish {
@@ -79,4 +123,14 @@ class AllFish {
         );
 
   List<Fish> get getList => fishMap.values.toList();
+
+  List<Fish> getListForMonth({int month, String hemisphere}) {
+    if (hemisphere == 'North') {
+      return getList
+          .where((Fish fish) => fish.availableForNorth(month))
+          .toList();
+    }
+
+    return getList.where((Fish fish) => fish.availableForSouth(month)).toList();
+  }
 }

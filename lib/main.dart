@@ -54,7 +54,10 @@ class _MainPageState extends State<MainPage> {
         ),
         actions: <Widget>[
           PopupMenuButton<String>(
-            color: Colors.white,
+            icon: Icon(
+              Icons.edit_location,
+              color: Colors.white,
+            ),
             onSelected: _selectHemisphere,
             itemBuilder: (BuildContext context) {
               return hemispheres.map((String option) {
