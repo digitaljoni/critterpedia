@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:critterpedia/models/fish_model.dart';
+import 'package:critterpedia/widgets/fish_row_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -32,7 +33,7 @@ class _FishListScreenState extends State<FishListScreen> {
   Widget build(BuildContext context) {
     if (fish != null) {
       return Center(
-        child: Text('${fish.name} - ${fish.price}'),
+        child: FishRowWidget(fish),
       );
     }
 
