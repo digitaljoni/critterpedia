@@ -2,9 +2,13 @@ import 'package:critterpedia/models/fish_model.dart';
 import 'package:flutter/material.dart';
 
 class FishDetailsAvailabilityWidget extends StatelessWidget {
-  FishDetailsAvailabilityWidget(this.fish);
+  FishDetailsAvailabilityWidget(
+    this.fish,
+    this.hemisphere,
+  );
 
   final Fish fish;
+  final String hemisphere;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -40,28 +44,29 @@ class FishDetailsAvailabilityWidget extends StatelessWidget {
               ),
               child: Row(
                 children: <Widget>[
-                  Expanded(
-                    flex: 1,
-                    child: Center(
-                      child: Text(
-                        'Northern',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                  (hemisphere == 'North')
+                      ? Expanded(
+                          flex: 1,
+                          child: Center(
+                            child: Text(
+                              'Northern',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        )
+                      : Expanded(
+                          flex: 1,
+                          child: Center(
+                            child: Text(
+                              'Southern',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Center(
-                      child: Text(
-                        'Southern',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
                   Expanded(
                     flex: 1,
                     child: Center(
@@ -82,24 +87,25 @@ class FishDetailsAvailabilityWidget extends StatelessWidget {
               ),
               child: Row(
                 children: <Widget>[
-                  Expanded(
-                    flex: 1,
-                    child: Center(
-                      child: Text(
-                        '${fish.getMonthAvailableNorth}',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Center(
-                      child: Text(
-                        '${fish.getMonthAvailableSouth}',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
+                  (hemisphere == 'North')
+                      ? Expanded(
+                          flex: 1,
+                          child: Center(
+                            child: Text(
+                              '${fish.getMonthAvailableNorth}',
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        )
+                      : Expanded(
+                          flex: 1,
+                          child: Center(
+                            child: Text(
+                              '${fish.getMonthAvailableSouth}',
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
                   Expanded(
                     flex: 1,
                     child: Center(

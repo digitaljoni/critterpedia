@@ -23,7 +23,20 @@ class MainPage extends StatefulWidget {
   _MainPageState createState() => _MainPageState();
 }
 
+const List<String> hemispheres = [
+  'North',
+  'South',
+];
+
 class _MainPageState extends State<MainPage> {
+  String hemisphere = 'North';
+
+  void _selectHemisphere(String selection) {
+    setState(() {
+      hemisphere = selection;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -39,8 +52,29 @@ class _MainPageState extends State<MainPage> {
             color: Colors.white,
           ),
         ),
+        actions: <Widget>[
+          PopupMenuButton<String>(
+            color: Colors.white,
+            onSelected: _selectHemisphere,
+            itemBuilder: (BuildContext context) {
+              return hemispheres.map((String option) {
+                return PopupMenuItem<String>(
+                  value: option,
+                  child: Row(
+                    children: <Widget>[
+                      (option == hemisphere)
+                          ? Icon(Icons.radio_button_checked)
+                          : Icon(Icons.radio_button_unchecked),
+                      Text(option),
+                    ],
+                  ),
+                );
+              }).toList();
+            },
+          ),
+        ],
       ),
-      body: FishListScreen(),
+      body: FishListScreen(hemisphere),
     );
   }
 }
