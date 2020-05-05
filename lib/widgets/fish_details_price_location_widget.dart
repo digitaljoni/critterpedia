@@ -24,6 +24,7 @@ class FishDetailsPriceLocationWidget extends StatelessWidget {
               child: Center(
                 child: Text(
                   '$location',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20.0,
                   ),

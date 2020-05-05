@@ -55,7 +55,7 @@ class _MainPageState extends State<MainPage> {
         actions: <Widget>[
           PopupMenuButton<String>(
             icon: Icon(
-              Icons.edit_location,
+              Icons.explore,
               color: Colors.white,
             ),
             onSelected: _selectHemisphere,
