@@ -1,3 +1,4 @@
+import 'package:critterpedia/screens/fish_list_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(CritterpediaApp());
@@ -39,7 +40,7 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
       ),
-      body: Container(),
+      body: FishListScreen(),
     );
   }
 }
