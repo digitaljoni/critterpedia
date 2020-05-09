@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:critterpedia/models/fish_model.dart';
+import 'package:critterpedia/widgets/fish_row_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -9,15 +11,17 @@ class FishListScreen extends StatefulWidget {
 }
 
 class _FishListScreenState extends State<FishListScreen> {
+  Fish fish;
+
   Future<void> _fetchFish() async {
     final http.Response response =
         await http.get('http://acnhapi.com/v1/fish/8');
 
     final dynamic jsonBody = json.decode(response.body);
 
-    print(jsonBody['id']);
-    print(jsonBody['name']['name-USen']);
-    print(jsonBody['price']);
+    setState(() {
+      fish = Fish.fromJson(jsonBody);
+    });
   }
 
   @override
@@ -28,6 +32,14 @@ class _FishListScreenState extends State<FishListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    if (fish != null) {
+      return Center(
+        child: FishRowWidget(fish),
+      );
+    }
+
+    return Center(
+      child: CircularProgressIndicator(),
+    );
   }
 }
