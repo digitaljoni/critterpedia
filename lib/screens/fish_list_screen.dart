@@ -11,30 +11,36 @@ class FishListScreen extends StatefulWidget {
 }
 
 class _FishListScreenState extends State<FishListScreen> {
-  Fish fish;
+  AllFish allFish;
 
-  Future<void> _fetchFish() async {
+  Future<void> _fetchAllFish() async {
     final http.Response response =
-        await http.get('http://acnhapi.com/v1/fish/8');
+        await http.get('http://acnhapi.com/v1/fish/');
 
     final dynamic jsonBody = json.decode(response.body);
 
     setState(() {
-      fish = Fish.fromJson(jsonBody);
+      allFish = AllFish.fromJson(jsonBody);
     });
   }
 
   @override
   void initState() {
     super.initState();
-    _fetchFish();
+    _fetchAllFish();
+  }
+
+  Widget _fishListViewBuilder(BuildContext context, int index) {
+    Fish fish = allFish.getList[index];
+    return FishRowWidget(fish);
   }
 
   @override
   Widget build(BuildContext context) {
-    if (fish != null) {
-      return Center(
-        child: FishRowWidget(fish),
+    if (allFish != null) {
+      return ListView.builder(
+        itemBuilder: _fishListViewBuilder,
+        itemCount: allFish.getList.length,
       );
     }
 
