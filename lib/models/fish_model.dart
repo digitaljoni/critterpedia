@@ -1,3 +1,4 @@
+import 'package:critterpedia/constants/month_names.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'fish_model.g.dart';
 
@@ -53,9 +54,20 @@ class Fish {
 
   String get getTimeAvailable => (isAllDay) ? 'All day' : timeAvailable;
   String get getMonthAvailableNorth =>
-      (isAllYear) ? 'All year' : northernMonths;
+      (isAllYear) ? 'All year' : monthNumberToName(northernMonths);
   String get getMonthAvailableSouth =>
-      (isAllYear) ? 'All year' : southernMonths;
+      (isAllYear) ? 'All year' : monthNumberToName(southernMonths);
+
+  String monthNumberToName(String monthRange) {
+    final List<String> monthRangeList =
+        monthRange.replaceAll(' ', '').split('&');
+
+    return monthRangeList.map((String months) {
+      return months.split('-').map((String month) {
+        return monthNames[month];
+      }).join('-');
+    }).join(' & ');
+  }
 }
 
 @JsonSerializable()
