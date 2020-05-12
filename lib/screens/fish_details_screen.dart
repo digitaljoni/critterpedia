@@ -7,9 +7,13 @@ import 'package:critterpedia/widgets/fish_details_title_widget.dart';
 import 'package:flutter/material.dart';
 
 class FishDetailsScreen extends StatelessWidget {
-  FishDetailsScreen(this.fish);
+  FishDetailsScreen(
+    this.fish,
+    this.hemisphere,
+  );
 
   final Fish fish;
+  final String hemisphere;
 
   final LinearGradient linearGradient = LinearGradient(
     begin: FractionalOffset.topCenter,
@@ -33,7 +37,10 @@ class FishDetailsScreen extends StatelessWidget {
                 title: fish.name ?? '',
                 rarity: fish.rarity ?? '',
               ),
-              FishDetailsAvailabilityWidget(fish),
+              FishDetailsAvailabilityWidget(
+                fish,
+                hemisphere,
+              ),
               FishDetailsPriceLocationWidget(
                 price: fish.price,
                 location: fish.location,

@@ -4,9 +4,13 @@ import 'package:critterpedia/widgets/fish_icon_widget.dart';
 import 'package:flutter/material.dart';
 
 class FishRowWidget extends StatelessWidget {
-  FishRowWidget(this.fish);
+  FishRowWidget(
+    this.fish,
+    this.hemisphere,
+  );
 
   final Fish fish;
+  final String hemisphere;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +19,7 @@ class FishRowWidget extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (BuildContext context) {
-              return FishDetailsScreen(fish);
+              return FishDetailsScreen(fish, hemisphere);
             },
           ),
         );

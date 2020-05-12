@@ -6,6 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class FishListScreen extends StatefulWidget {
+  FishListScreen(this.hemisphere);
+
+  final String hemisphere;
+
   @override
   _FishListScreenState createState() => _FishListScreenState();
 }
@@ -31,7 +35,7 @@ class _FishListScreenState extends State<FishListScreen> {
 
   Widget _fishListViewBuilder(BuildContext context, int index) {
     Fish fish = allFish.getList[index];
-    return FishRowWidget(fish);
+    return FishRowWidget(fish, widget.hemisphere);
   }
 
   @override

@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(CritterpediaApp());
 
+const List<String> hemispheres = [
+  'North',
+  'South',
+];
+
 class CritterpediaApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -24,6 +29,14 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  String hemisphere = 'North';
+
+  void _selectHemisphere(String selection) {
+    setState(() {
+      hemisphere = selection;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -39,8 +52,32 @@ class _MainPageState extends State<MainPage> {
             color: Colors.white,
           ),
         ),
+        actions: <Widget>[
+          PopupMenuButton<String>(
+            icon: Icon(
+              Icons.explore,
+              color: Colors.white,
+            ),
+            onSelected: _selectHemisphere,
+            itemBuilder: (BuildContext context) {
+              return hemispheres.map((String option) {
+                return PopupMenuItem<String>(
+                  value: option,
+                  child: Row(
+                    children: <Widget>[
+                      (option == hemisphere)
+                          ? Icon(Icons.radio_button_checked)
+                          : Icon(Icons.radio_button_unchecked),
+                      Text(option),
+                    ],
+                  ),
+                );
+              }).toList();
+            },
+          ),
+        ],
       ),
-      body: FishListScreen(),
+      body: FishListScreen(hemisphere),
     );
   }
 }
