@@ -9,16 +9,15 @@ class FishListScreen extends StatefulWidget {
 }
 
 class _FishListScreenState extends State<FishListScreen> {
-  
   Future<void> _fetchFish() async {
-    final http.Response response = await http.get('http://acnhapi.com/fish/8');
+    final http.Response response =
+        await http.get('http://acnhapi.com/v1/fish/8');
 
     final dynamic jsonBody = json.decode(response.body);
 
-    print (jsonBody['id']);
-    print (jsonBody['name']['name-en']);
-    print (jsonBody['price']);
-
+    print(jsonBody['id']);
+    print(jsonBody['name']['name-USen']);
+    print(jsonBody['price']);
   }
 
   @override
